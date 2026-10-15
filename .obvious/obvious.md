@@ -76,11 +76,19 @@ Use non-interactive flags with file operations to avoid hanging on confirmation 
 > **Warning:** Running full-repo typecheck, lint, or tests may OOM or timeout in the sandbox for large repos.
 > Use the scoped commands below when verifying changes.
 
-### Verified Commands
+### Verified Commands (re-verified 2026-10-15)
 
 - **Lint:** `uv run ruff check code_review_graph/` — all checks passed
 - **Typecheck:** `uv run mypy code_review_graph/ --ignore-missing-imports --no-strict-optional` — no issues in 70 source files
 - **Test:** `uv run pytest tests/ --tb=short -q` — 2398 passed, 5 skipped, 2 xpassed
+
+### Primary User Flow (verified 2026-10-15)
+
+```bash
+uv run code-review-graph build    # parsed 261 files → 5254 nodes, 43441 edges, schema v9
+uv run code-review-graph status   # 5202 nodes / 43091 edges, 34 languages
+uv run code-review-graph search "parse_files"  # FTS search returns ranked results
+```
 
 ### Scoped Workflow
 
@@ -90,9 +98,10 @@ Use non-interactive flags with file operations to avoid hanging on confirmation 
 
 ## Sandbox Snapshot
 
-- **Snapshot ID:** `2rxknhrhdfkdqdh5jaen:default`
-- **Captured:** 2026-08-11T16:25:58Z
+- **Snapshot ID:** `5ilamfpjtht9cfa8lpfa:default`
+- **Captured:** 2026-10-15T22:11:00Z
 - **Dev stack healthy:** yes
+- **Contents:** Python 3.13.14, uv 0.13.1, `.venv` synced via `uv sync --extra dev`, graph DB built at repo root
 
 ## Bibliography
 
